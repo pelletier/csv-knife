@@ -4,6 +4,10 @@ Command line tool to manipulate CSV files.
 
 ## Installation
 
+### Binary
+
+Binaries for your platform may be available. Check out the [Releases page](https://github.com/pelletier/csv-knife/releases).
+
 ### From source
 
 ```bash
