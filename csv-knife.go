@@ -66,6 +66,8 @@ func init() {
 	flag.BoolVar(&readerTrimLeadingSpace, "rt", true, "trim leading spaces in fields")
 
 	// writer settings
+	flag.StringVar(&writerDelimiter, "wd", ",", "field delimiter for the output stream")
+	flag.BoolVar(&writerUseCRLF, "wc", false, "use CRLF as a new line character in the output stream")
 }
 
 func main() {
@@ -93,6 +95,9 @@ func main() {
 
 	stdoutWriter := bufio.NewWriter(os.Stdout)
 	csvWriter := csv.NewWriter(stdoutWriter)
+	r, _ = utf8.DecodeRuneInString(writerDelimiter)
+	csvWriter.Comma = r
+	csvWriter.UseCRLF = writerUseCRLF
 
 	buff := make(chan []string, 2)
 	var wg sync.WaitGroup
